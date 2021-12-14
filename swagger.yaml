@@ -1,0 +1,125 @@
+openapi: 3.0.0
+info:
+  title: T-shirt store API
+  description: LCO - A course to create API for ecomm store
+  version: 1.1.0
+  contact:
+    email: haseeb@gmail.com
+    url: "https://lco.dev"
+
+# servers:
+#   - url: https://localhost:4000/api/v1
+#     description: for local host - secure
+#   - url: http://localhost:4000/api/v1
+#     description: for local host - regular
+
+servers:
+  - url: "{protocols}://localhost:4000/api/{version}"
+    description: for local host
+    variables:
+      version: # can be named anything
+        enum:
+          - v1
+          - v2
+        default: v1
+      protocols:   # can be named anything
+        enum:
+          - http
+          - https
+        default : http
+
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+
+paths:
+  /dummy:
+    get:
+      tags:
+        - Home
+      summary: returns a greet message from LCO
+      responses:
+        200:
+          description: All OK response
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "mystring"
+        400:
+          descriptio: Bad request
+        500:
+          description: internal server error
+
+  /signup:
+    post:
+      tags:
+        - User
+      summary: signup a new user. required files are - name, email, password and photo
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+                - password
+                - photo
+              properties:
+                name:
+                  type: string
+                  required: true
+                email:
+                  type: string
+                password:
+                  type: string
+                photo:
+                  in: formData
+                  description: The uploaded file data
+                  type: file
+                  format: binary
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  token:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      email:
+                        type: string
+                      role:
+                        type: string
+                      photo:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          secure_url:
+                            type: string
+                      _id:
+                        type: string
+                      createdAt:
+                        type: string
+        400:
+          description: Bad request
+        500:
+          description: internal server error

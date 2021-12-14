@@ -1,0 +1,26 @@
+{
+    "shippingInfo": {
+      "address": "1 Mahabubnagar",
+      "city": "Hyderabad",
+      "phoneNo": "9898989898",
+      "postalCode": "509001",
+      "state": "Telanagana",
+      "country": "India"
+    },
+    "orderItems": [
+      {
+        "name": "Pro Coder Anime tshirts",
+        "quantity": 1,
+        "image": "https://res.cloudinary.com/dk92l1yoc/image/upload/v1635757229/products/b4laryk4dbp6vdrvq3wv.png",
+        "price": 999,
+        "product": "61a500241a4068043cfda52c"
+      }
+    ],
+    "paymentInfo": {
+      "id": "testString"
+    },
+    "taxAmount": 40,
+    "shippingAmount": 10,
+    "totalAmount": 100
+  }
+  
